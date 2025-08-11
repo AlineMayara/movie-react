@@ -1,7 +1,25 @@
 import './index.css'
-import Movie from './Components/Movie'
+import MovieSection from './Components/MovieSection'
 
 function App() {
+  const lancamentos2024 = [
+    { id: 'l1', title: 'Duna: Parte 2', image: 'img/duna-2.webp' },
+    { id: 'l2', title: 'Godzilla e Kong', image: 'img/godzilla-kong.webp' },
+    { id: 'l3', title: 'Kung Fu Panda 4', image: 'img/kungfu-panda-4.webp' }
+  ]
+
+  const filmesEmAlta = [
+    { id: 'a1', title: 'As Branquelas', image: 'img/as-branquelas.jpeg' },
+    { id: 'a2', title: 'Oppenheimer', image: 'img/oppenheimer.webp' },
+    { id: 'a3', title: 'Barbie', image: 'img/barbie.webp' }
+  ]
+
+  const filmesFamilia = [
+    { id: 'f1', title: 'A Era do Gelo', image: 'img/eradogelo.webp' },
+    { id: 'f2', title: 'Os Corajosos', image: 'img/os-corajosos.webp' },
+    { id: 'f3', title: 'Shrek', image: 'img/shrek.webp' }
+  ]
+
   return (
     <>
       <header className="headercontainer">
@@ -63,86 +81,9 @@ function App() {
           </button>
         </div>
 
-        <div className="trending-movies">
-          <h2>Lançamentos DE 2024</h2>
-          <button className="chevron-btn">
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
-
-        <section>
-          <div id="secao" className="flex-center">
-            <button className="backward-btn">
-              <span className="material-symbols-outlined">
-                chevron_backward
-              </span>
-            </button>
-
-            <button className="forward-btn">
-              <span className="material-symbols-outlined">chevron_forward</span>
-            </button>
-
-            <div id="movies1" className="flex-center movies">
-              <Movie image="img/as-branquelas.jpeg" title="As Branquelas" />
-              <Movie image="img/os-corajosos.webp" title="Os Corajosos" />
-              <Movie image="img/eradogelo.webp" title="A Era do Gelo" />
-            </div>
-          </div>
-        </section>
-
-        <div class="trending-movies">
-          <h2>Filmes em alta</h2>
-          <button className="chevron-btn">
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
-
-        <section>
-          <div id="secao" class="flex-center">
-            <button className="backward-btn">
-              <span className="material-symbols-outlined">
-                chevron_backward
-              </span>
-            </button>
-
-            <button className="forward-btn">
-              <span className="material-symbols-outlined">chevron_forward</span>
-            </button>
-
-            <div id="movies2" class="flex-center movies">
-              <Movie image="img/as-branquelas.jpeg" title="As Branquelas" />
-              <Movie image="img/os-corajosos.webp" title="Os Corajosos" />
-              <Movie image="img/eradogelo.webp" title="A Era do Gelo" />
-            </div>
-          </div>
-        </section>
-
-        <div class="trending-movies">
-          <h2>Filmes para Família</h2>
-          <button className="chevron-btn">
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
-
-        <section>
-          <div id="secao" class="flex-center">
-            <button className="backward-btn">
-              <span className="material-symbols-outlined">
-                chevron_backward
-              </span>
-            </button>
-
-            <button className="forward-btn">
-              <span className="material-symbols-outlined">chevron_forward</span>
-            </button>
-
-            <div id="movies3" className="flex-center movies">
-              <Movie image="img/as-branquelas.jpeg" title="As Branquelas" />
-              <Movie image="img/os-corajosos.webp" title="Os Corajosos" />
-              <Movie image="img/eradogelo.webp" title="A Era do Gelo" />
-            </div>
-          </div>
-        </section>
+        <MovieSection title="Lançamentos DE 2024" movies={lancamentos2024} />
+        <MovieSection title="Filmes em alta" movies={filmesEmAlta} />
+        <MovieSection title="Filmes para Família" movies={filmesFamilia} />
       </main>
     </>
   )
