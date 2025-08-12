@@ -2,23 +2,15 @@ import './index.css'
 import MovieSection from './Components/MovieSection'
 
 function App() {
-  const lancamentos2024 = [
-    { id: 'l1', title: 'Duna: Parte 2', image: 'img/duna-2.webp' },
-    { id: 'l2', title: 'Godzilla e Kong', image: 'img/godzilla-kong.webp' },
-    { id: 'l3', title: 'Kung Fu Panda 4', image: 'img/kungfu-panda-4.webp' }
-  ]
+  const apiKey = '1865f43a0549ca50d341dd9ab8b29f49'
 
-  const filmesEmAlta = [
-    { id: 'a1', title: 'As Branquelas', image: 'img/as-branquelas.jpeg' },
-    { id: 'a2', title: 'Oppenheimer', image: 'img/oppenheimer.webp' },
-    { id: 'a3', title: 'Barbie', image: 'img/barbie.webp' }
-  ]
-
-  const filmesFamilia = [
-    { id: 'f1', title: 'A Era do Gelo', image: 'img/eradogelo.webp' },
-    { id: 'f2', title: 'Os Corajosos', image: 'img/os-corajosos.webp' },
-    { id: 'f3', title: 'Shrek', image: 'img/shrek.webp' }
-  ]
+  const urls = {
+    lancamentos: `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR&region=BR`,
+    emAlta: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=pt-BR&region=BR`,
+    familia: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=10751`,
+    acao: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=28`,
+    comedia: `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=35`
+  }
 
   return (
     <>
@@ -81,12 +73,47 @@ function App() {
           </button>
         </div>
 
-        <MovieSection title="Lançamentos DE 2024" movies={lancamentos2024} />
-        <MovieSection title="Filmes em alta" movies={filmesEmAlta} />
-        <MovieSection title="Filmes para Família" movies={filmesFamilia} />
+        <MovieSection
+          id="lancamentos"
+          title="Lançamentos"
+          apiUrl={urls.lancamentos}
+        />
+
+        <MovieSection
+          id="em-alta"
+          title="Filmes em Alta"
+          apiUrl={urls.emAlta}
+        />
+
+        <MovieSection
+          id="familia"
+          title="Filmes para Família"
+          apiUrl={urls.familia}
+        />
+        <MovieSection id="acao" title="Ação" apiUrl={urls.acao} />
+        <MovieSection id="comedia" title="Comédia" apiUrl={urls.comedia} />
       </main>
     </>
   )
 }
 
 export default App
+
+/*
+ const lancamentos = [
+    { id: 'l1', title: 'Duna: Parte 2', image: 'img/duna-2.webp' },
+    { id: 'l2', title: 'Godzilla e Kong', image: 'img/godzilla-kong.webp' },
+    { id: 'l3', title: 'Kung Fu Panda 4', image: 'img/kungfu-panda-4.webp' }
+  ]
+
+  const filmesEmAlta = [
+    { id: 'a1', title: 'As Branquelas', image: 'img/as-branquelas.jpeg' },
+    { id: 'a2', title: 'Oppenheimer', image: 'img/oppenheimer.webp' },
+    { id: 'a3', title: 'Barbie', image: 'img/barbie.webp' }
+  ]
+
+  const filmesFamilia = [
+    { id: 'f1', title: 'A Era do Gelo', image: 'img/eradogelo.webp' },
+    { id: 'f2', title: 'Os Corajosos', image: 'img/os-corajosos.webp' },
+    { id: 'f3', title: 'Shrek', image: 'img/shrek.webp' }
+  ]*/

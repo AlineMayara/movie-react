@@ -1,7 +1,34 @@
+import { useState, useEffect } from 'react'
 import Movie from '../Movie'
 import './MovieSection.module.css'
 
-const MovieSection = ({ title, movies }) => {
+const MovieSection = ({ title, apiUrl }) => {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(true)
+  const baseImgUrl = 'https://image.tmdb.org/t/p/w200'
+
+  useEffect(() => {
+    setLoading(true)
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        setMovies(data.results)
+      })
+      .catch(error => {
+        console.error('Erro ao buscar filmes:', error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [apiUrl])
+
+  // 1. Exibe a mensagem de carregamento enquanto busca os dados
+  if (loading) {
+    return <h2>Carregando filmes...</h2>
+  }
+
+  // 2. Após o carregamento, se não houver filmes, não renderiza nada
   if (!movies || movies.length === 0) {
     return null
   }
@@ -23,7 +50,11 @@ const MovieSection = ({ title, movies }) => {
 
           <div className="flex-center movies">
             {movies.map(movie => (
-              <Movie key={movie.id} image={movie.image} title={movie.title} />
+              <Movie
+                key={movie.id}
+                image={`${baseImgUrl}${movie.poster_path}`}
+                title={movie.title}
+              />
             ))}
           </div>
 
