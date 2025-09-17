@@ -1,13 +1,14 @@
-import App from './App'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './Pages/HomePage'
+import MovieDetails from './Pages/MovieDetails'
 
 function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+
+      <Route path="/movie/:movieId" element={<MovieDetails />} />
+    </Routes>
   )
 }
 

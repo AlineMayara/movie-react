@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Movie from '../Movie'
-import './MovieSection.module.css'
+import './ApiMovie.module.css'
 
 const MovieSection = ({ title, apiUrl }) => {
   const [movies, setMovies] = useState([])
@@ -23,12 +23,10 @@ const MovieSection = ({ title, apiUrl }) => {
       })
   }, [apiUrl])
 
-  // 1. Exibe a mensagem de carregamento enquanto busca os dados
   if (loading) {
     return <h2>Carregando filmes...</h2>
   }
 
-  // 2. Após o carregamento, se não houver filmes, não renderiza nada
   if (!movies || movies.length === 0) {
     return null
   }
@@ -52,6 +50,7 @@ const MovieSection = ({ title, apiUrl }) => {
             {movies.map(movie => (
               <Movie
                 key={movie.id}
+                id={movie.id}
                 image={`${baseImgUrl}${movie.poster_path}`}
                 title={movie.title}
               />

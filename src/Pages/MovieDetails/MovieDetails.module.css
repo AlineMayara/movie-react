@@ -1,0 +1,54 @@
+.movie-details-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 40px;
+    gap: 40px;
+    color: #fff;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.details-poster {
+    width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.details-info {
+    flex: 1;
+}
+
+.details-title {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.details-overview {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.loading {
+    color: white;
+    text-align: center;
+    padding: 50px;
+    font-size: 2rem;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .movie-details-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .details-title {
+        font-size: 2.2rem;
+    }
+}
