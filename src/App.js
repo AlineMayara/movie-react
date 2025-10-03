@@ -12,7 +12,7 @@ function App() {
           <ul>
             <li>Filmes</li>
             <li>Lançamentos</li>
-            <li>Listas</li>
+            <li>Favoritos</li>
           </ul>
 
           <form className="search-form">
