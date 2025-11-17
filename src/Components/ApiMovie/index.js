@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Movie from '../Movie'
-import './ApiMovie.module.css'
+import './ApiMovie.css'
 
 const MovieSection = ({ title, apiUrl }) => {
   const [movies, setMovies] = useState([])

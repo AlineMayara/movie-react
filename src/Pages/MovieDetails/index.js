@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useFetch } from '../../Hooks/useFetch'
-import './MovieDetails.module.css'
+
+import './MovieDetails.css'
 
 const MovieDetails = () => {
   const { movieId } = useParams()

@@ -1,4 +1,4 @@
-import './Movie.module.css'
+import './movie.css'
 import { Link } from 'react-router-dom'
 
 const Movie = ({ image, title, id }) => {

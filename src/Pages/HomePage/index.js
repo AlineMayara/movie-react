@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ApiMovie from '../../Components/ApiMovie'
 import CategoryFilter from '../../Components/CategoryFilter'
-import './HomePage.module.css'
+import './HomePage.css'
 
 const HomePage = () => {
   const apiKey = '1865f43a0549ca50d341dd9ab8b29f49'

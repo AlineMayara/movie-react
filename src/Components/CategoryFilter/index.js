@@ -1,5 +1,6 @@
 import React from 'react'
-import './CategoryFilter.module.css'
+
+import './CategoryFilter.css'
 
 import { genres } from '../../Data/genres'
 
