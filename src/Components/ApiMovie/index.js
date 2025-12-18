@@ -1,33 +1,21 @@
-import { useState, useEffect } from 'react'
 import Movie from '../Movie'
 import './ApiMovie.css'
+import { useFetch } from '../../Hooks/useFetch'
 
 const MovieSection = ({ title, apiUrl }) => {
-  const [movies, setMovies] = useState([])
-  const [loading, setLoading] = useState(true)
   const baseImgUrl = 'https://image.tmdb.org/t/p/w200'
 
-  useEffect(() => {
-    setLoading(true)
+  const { data, loading, error } = useFetch(apiUrl)
 
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        setMovies(data.results)
-      })
-      .catch(error => {
-        console.error('Erro ao buscar filmes:', error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [apiUrl])
+  if (error) {
+    return <h2>Ocorreu um erro: {error.message || error}</h2>
+  }
 
   if (loading) {
     return <h2>Carregando filmes...</h2>
   }
 
-  if (!movies || movies.length === 0) {
+  if (!data || data.results.length === 0) {
     return null
   }
 
@@ -47,7 +35,7 @@ const MovieSection = ({ title, apiUrl }) => {
           </button>
 
           <div className="flex-center movies">
-            {movies.map(movie => (
+            {data.results.map(movie => (
               <Movie
                 key={movie.id}
                 id={movie.id}
