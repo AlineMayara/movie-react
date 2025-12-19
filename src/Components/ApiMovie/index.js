@@ -1,26 +1,48 @@
+import { useEffect } from 'react'
 import Movie from '../Movie'
 import './ApiMovie.css'
 import { useFetch } from '../../Hooks/useFetch'
 
+// Importação do Glide e seus estilos
+import Glide from '@glidejs/glide'
+import '@glidejs/glide/dist/css/glide.core.min.css'
+
 const MovieSection = ({ title, apiUrl }) => {
   const baseImgUrl = 'https://image.tmdb.org/t/p/w200'
-
   const { data, loading, error } = useFetch(apiUrl)
 
-  if (error) {
-    return <h2>Ocorreu um erro: {error.message || error}</h2>
-  }
+  // Criamos um ID único para cada seção baseado no título
+  const sectionId = title.replace(/\s+/g, '-').toLowerCase()
 
-  if (loading) {
-    return <h2>Carregando filmes...</h2>
-  }
+  useEffect(() => {
+    // Só inicializa se os dados existirem e o carregamento terminou
+    if (!loading && data?.results?.length > 0) {
+      const glide = new Glide(`.glide-${sectionId}`, {
+        type: 'carousel',
+        startAt: 0,
+        perView: 6, // Quantos filmes aparecem
+        gap: 10,
+        breakpoints: {
+          1200: { perView: 5 },
+          1024: { perView: 4 },
+          768: { perView: 3 },
+          480: { perView: 2 }
+        }
+      })
 
-  if (!data || data.results.length === 0) {
-    return null
-  }
+      glide.mount()
+
+      // Limpa o glide ao fechar o componente para evitar erros de memória
+      return () => glide.destroy()
+    }
+  }, [loading, data, sectionId])
+
+  if (error) return <h2>Ocorreu um erro: {error.message || error}</h2>
+  if (loading) return <h2>Carregando filmes...</h2>
+  if (!data || data.results.length === 0) return null
 
   return (
-    <>
+    <section className="movie-section-container">
       <div className="trending-movies">
         <h2>{title}</h2>
         <button className="chevron-btn">
@@ -28,41 +50,40 @@ const MovieSection = ({ title, apiUrl }) => {
         </button>
       </div>
 
-      <section>
-        <div className="flex-center secao-container">
-          <button className="backward-btn">
+      {/* Estrutura obrigatória do Glide */}
+      <div className={`glide glide-${sectionId}`}>
+        <div className="glide__track" data-glide-el="track">
+          <ul className="glide__slides">
+            {data.results.map(movie => (
+              <li key={movie.id} className="glide__slide">
+                <Movie
+                  id={movie.id}
+                  image={`${baseImgUrl}${movie.poster_path}`}
+                  title={movie.title}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Botões de Navegação conectados ao Glide */}
+        <div className="glide__arrows" data-glide-el="controls">
+          <button
+            className="glide__arrow glide__arrow--left backward-btn"
+            data-glide-dir="<"
+          >
             <span className="material-symbols-outlined">chevron_backward</span>
           </button>
-
-          <div className="flex-center movies">
-            {data.results.map(movie => (
-              <Movie
-                key={movie.id}
-                id={movie.id}
-                image={`${baseImgUrl}${movie.poster_path}`}
-                title={movie.title}
-              />
-            ))}
-          </div>
-
-          <button className="forward-btn">
+          <button
+            className="glide__arrow glide__arrow--right forward-btn"
+            data-glide-dir=">"
+          >
             <span className="material-symbols-outlined">chevron_forward</span>
           </button>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 
 export default MovieSection
-
-//Explicando o código acima:
-
-/* Em resumo: o objetivo desse código é garantir que a seção de filmes (MovieSection) só seja exibida,
- se houver de fato uma lista de filmes (movies) com pelo menos um item. Se a lista não existir ou estiver vazia, 
- o componente "desiste" de ser renderizado, evitando erros e mantendo a interface limpa, sem seções vazias.
-  Foi feito uma destruturação de props para extrair o título e a lista de filmes (movies) da propriedade "title" e "movies".
-  A condição if (!movies || movies.length === 0) verifica se a lista de filmes (movies) existe e se ela tem pelo menos um item.
-   Se a condição for verdadeira, o componente "MovieSection" não será renderizado, evitando erros e mantendo a interface limpa, sem seções vazias.
-    Se a condição for falsa, o componente "MovieSection" será renderizado, exibindo a seção de filmes com o título e os filmes.
-     */
