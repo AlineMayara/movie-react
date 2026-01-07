@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import './index.css'
 import AppRoutes from './routes'
 
@@ -9,7 +9,7 @@ function App() {
 
   const handleSearch = e => {
     e.preventDefault()
-    if (!input) return
+    if (!input.trim()) return
 
     navigate(`/search?q=${input}`)
     setInput(' ')
@@ -19,7 +19,10 @@ function App() {
     <>
       <header className="headercontainer">
         <nav className="navbar container">
-          <h1>Filmes Online</h1>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1 style={{ cursor: 'pointer' }}>Home</h1>
+          </Link>
+
           <ul>
             <li>Filmes</li>
             <li>Lançamentos</li>
@@ -40,6 +43,7 @@ function App() {
             <input
               className="search-input"
               type="text"
+              value={input}
               onChange={e => setInput(e.target.value)}
               placeholder="Que filme você quer assistir?"
             />
