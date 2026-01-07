@@ -32,7 +32,6 @@ const MovieSection = ({ title, apiUrl }) => {
 
       glide.mount()
 
-      // Limpa o glide ao fechar o componente para evitar erros de memória
       return () => glide.destroy()
     }
   }, [loading, data, sectionId])

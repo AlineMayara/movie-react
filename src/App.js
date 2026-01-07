@@ -1,12 +1,23 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './index.css'
-// 1. Importe o seu componente de rotas
 import AppRoutes from './routes'
 
 function App() {
+  const [input, setInput] = useState(' ')
+  const navigate = useNavigate()
+
+  const handleSearch = e => {
+    e.preventDefault()
+    if (!input) return
+
+    navigate(`/search?q=${input}`)
+    setInput(' ')
+  }
+
   return (
     <>
       <header className="headercontainer">
-        {/* O header é o layout principal e aparecerá em todas as páginas */}
         <nav className="navbar container">
           <h1>Filmes Online</h1>
           <ul>
@@ -15,27 +26,28 @@ function App() {
             <li>Favoritos</li>
           </ul>
 
-          <form className="search-form">
-            <button className="search-btn" type="button">
+          <form className="search-form" onSubmit={handleSearch}>
+            <button className="search-btn" type="submit">
               <span className="material-symbols-outlined">search</span>
             </button>
-            <button className="close-btn">
+            <button
+              className="close-btn"
+              type="button"
+              onClick={() => setInput(' ')}
+            >
               <span className="material-symbols-outlined">close</span>
             </button>
             <input
               className="search-input"
               type="text"
+              onChange={e => setInput(e.target.value)}
               placeholder="Que filme você quer assistir?"
             />
           </form>
         </nav>
       </header>
 
-      {/* 2. Renderize o componente que contém as rotas */}
-      {/* Ele decidirá se mostra a HomePage ou a MovieDetails */}
       <AppRoutes />
-
-      {/* Você pode adicionar um rodapé aqui se ele for comum a todas as páginas */}
     </>
   )
 }
