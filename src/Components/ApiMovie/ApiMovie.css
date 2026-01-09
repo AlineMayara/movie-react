@@ -1,1 +1,31 @@
 
+
+.fav-button {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+
+.fav-button.active {
+  color: #ff4757; /* Cor vermelha para quando estiver favoritado */
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Grid da página de Favoritos */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.favorites-container h2 {
+    color: white;
+    margin-top: 2rem;
+}

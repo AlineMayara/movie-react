@@ -26,7 +26,11 @@ function App() {
           <ul>
             <li>Filmes</li>
             <li>Lançamentos</li>
-            <li>Favoritos</li>
+            <li>
+              <li>
+                <Link to="/favoritos">Favoritos</Link>
+              </li>
+            </li>
           </ul>
 
           <form className="search-form" onSubmit={handleSearch}>
